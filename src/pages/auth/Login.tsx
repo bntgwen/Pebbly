@@ -70,7 +70,7 @@ export function AuthLayout({ children, title, subtitle }: { children: React.Reac
               className="h-full w-full object-contain" 
             />
           </div>
-        <span className="text-lg font-bold tracking-tight">Finova</span>
+        <span className="text-lg font-bold tracking-tight">Pebble</span>
       </Link>
       <div className="w-full max-w-md">
         <div className="glass-card rounded-2xl p-8 shadow-2xl animate-scale-in">

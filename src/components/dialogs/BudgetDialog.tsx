@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { IDRInput } from "@/components/IDRInput";
+import { Input } from "@/components/ui/input"; 
 import { useFinanceStore } from "@/store/finance";
 import type { Budget, BudgetPeriod } from "@/lib/types";
 import { toast } from "sonner";
@@ -19,17 +19,28 @@ export function BudgetDialog({ open, onOpenChange, editing }: Props) {
   const expenseCategories = categories.filter((c) => c.type === "expense");
 
   const [categoryId, setCategoryId] = useState("");
-  const [limit, setLimit] = useState(0);
+  const [limit, setLimit] = useState<number>(0);
   const [period, setPeriod] = useState<BudgetPeriod>("monthly");
   const [error, setError] = useState("");
 
+  // FIX: Hapus expenseCategories dari dependency array di bawah
   useEffect(() => {
     if (open) {
-      if (editing) { setCategoryId(editing.categoryId); setLimit(editing.limit); setPeriod(editing.period); }
-      else { setCategoryId(expenseCategories[0]?.id ?? ""); setLimit(0); setPeriod("monthly"); }
+      if (editing) { 
+        setCategoryId(editing.categoryId); 
+        setLimit(editing.limit); 
+        setPeriod(editing.period); 
+      }
+      else { 
+        // Ambil kategori pertama langsung dari store untuk nilai awal
+        const initialCatId = categories.find((c) => c.type === "expense")?.id ?? "";
+        setCategoryId(initialCatId); 
+        setLimit(0); 
+        setPeriod("monthly"); 
+      }
       setError("");
     }
-  }, [open, editing, expenseCategories]);
+  }, [open, editing, categories]); // <-- DI SINI KUNCI FIX-NYA
 
   const submit = () => {
     if (!categoryId) { setError("Pilih kategori"); return; }
@@ -37,9 +48,21 @@ export function BudgetDialog({ open, onOpenChange, editing }: Props) {
     if (!editing && budgets.some((b) => b.categoryId === categoryId && b.period === period)) {
       setError("Anggaran untuk kategori & periode ini sudah ada"); return;
     }
-    if (editing) { updateBudget(editing.id, { categoryId, limit, period }); toast.success("Anggaran diperbarui"); }
-    else { addBudget({ categoryId, limit, period }); toast.success("Anggaran ditambahkan"); }
+    if (editing) { 
+      updateBudget(editing.id, { categoryId, limit, period }); 
+      toast.success("Anggaran diperbarui"); 
+    } else { 
+      addBudget({ categoryId, limit, period }); 
+      toast.success("Anggaran ditambahkan"); 
+    }
     onOpenChange(false);
+  };
+
+  const formattedLimit = limit > 0 ? limit.toLocaleString("id-ID") : "";
+
+  const handleLimitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value.replace(/\D/g, "");
+    setLimit(Number(rawValue));
   };
 
   return (
@@ -56,10 +79,21 @@ export function BudgetDialog({ open, onOpenChange, editing }: Props) {
               </SelectContent>
             </Select>
           </div>
+          
           <div className="space-y-2">
             <Label>Limit</Label>
-            <IDRInput value={limit} onValueChange={setLimit} />
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm font-medium">Rp</span>
+              <Input 
+                type="text" 
+                className="pl-9 font-mono-num"
+                value={formattedLimit}
+                onChange={handleLimitChange}
+                placeholder="0"
+              />
+            </div>
           </div>
+
           <div className="space-y-2">
             <Label>Periode</Label>
             <Select value={period} onValueChange={(v) => setPeriod(v as BudgetPeriod)}>
