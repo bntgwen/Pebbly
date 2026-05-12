@@ -38,7 +38,7 @@ export function exportCSV(d: FinanceData) {
       escape(t.notes ?? ""),
     ].join(","));
   const csv = "\uFEFF" + [header.join(","), ...rows].join("\n");
-  trigger(new Blob([csv], { type: "text/csv;charset=utf-8;" }), `finova-transaksi-${Date.now()}.csv`);
+  trigger(new Blob([csv], { type: "text/csv;charset=utf-8;" }), `pebble-transaksi-${Date.now()}.csv`);
 }
 
 export function exportPDF(d: FinanceData) {
@@ -47,7 +47,7 @@ export function exportPDF(d: FinanceData) {
   const totalExpense = d.transactions.filter((t) => t.type === "expense").reduce((s, t) => s + t.amount, 0);
   const netWorth = d.accounts.reduce((s, a) => s + a.balance, 0);
 
-  doc.setFontSize(20); doc.text("Laporan Keuangan Finova", 14, 20);
+  doc.setFontSize(20); doc.text("Laporan Keuangan pebble", 14, 20);
   doc.setFontSize(10); doc.setTextColor(120);
   doc.text(`Dibuat: ${new Date().toLocaleString("id-ID")}`, 14, 27);
   doc.setTextColor(0);
@@ -98,5 +98,5 @@ export function exportPDF(d: FinanceData) {
     styles: { fontSize: 9 },
   });
 
-  doc.save(`finova-laporan-${Date.now()}.pdf`);
+  doc.save(`pebble-laporan-${Date.now()}.pdf`);
 }

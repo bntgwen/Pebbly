@@ -156,7 +156,7 @@ export const useFinanceStore = create<FinanceState>()(
         if (s.accounts.length === 0) set({ accounts: defaultAccounts });
       },
     }),
-    { name: "finova-finance" }
+    { name: "pebble-finance" }
   )
 );
 

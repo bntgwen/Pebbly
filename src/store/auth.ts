@@ -58,6 +58,6 @@ export const useAuthStore = create<AuthState>()(
         return get().users.find((u) => u.id === id) ?? null;
       },
     }),
-    { name: "finova-auth" }
+    { name: "pebble-auth" }
   )
 );

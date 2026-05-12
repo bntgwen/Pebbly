@@ -24,7 +24,7 @@ export const useThemeStore = create<ThemeState>()(
       },
     }),
     {
-      name: "finova-theme",
+      name: "pebble-theme",
       onRehydrateStorage: () => (state) => {
         if (state) applyTheme(state.theme);
       },
