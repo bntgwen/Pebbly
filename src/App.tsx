@@ -14,6 +14,7 @@ import ResetPassword from "./pages/auth/ResetPassword";
 
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AppShell } from "./components/AppShell";
+import SplashScreen from "./components/SplashScreen";
 
 import Dashboard from "./pages/app/Dashboard";
 import Transactions from "./pages/app/Transactions";
@@ -42,7 +43,8 @@ const App = () => {
         <Sonner position="top-right" />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Landing />} />
+            <Route path="/" element={<SplashScreen />} />
+            <Route path="/welcome" element={<Landing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
