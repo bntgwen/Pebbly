@@ -131,34 +131,115 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <main className="flex-1 p-4 lg:p-8 pb-24 lg:pb-8 animate-fade-in">{children}</main>
       </div>
 
-      {/* Mobile bottom nav */}
-      <nav className="lg:hidden fixed bottom-0 inset-x-0 h-16 bg-background/95 backdrop-blur-xl border-t border-border z-40 grid grid-cols-5">
-        {mobileNav.map((item) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            end={item.end}
-            className={({ isActive }) =>
-              cn(
-                "flex flex-col items-center justify-center gap-0.5 text-[10px] font-medium transition-colors",
-                isActive ? "text-primary" : "text-muted-foreground"
-              )
-            }
-          >
-            <item.icon className="h-5 w-5" />
-            {item.label}
-          </NavLink>
-        ))}
-      </nav>
+    {/* Mobile bottom nav - iOS Liquid Glass */}
+<div className="lg:hidden fixed bottom-5 inset-x-0 z-40 flex justify-center px-4">
+  <nav
+    className="
+      relative
+      w-full
+      max-w-md
+      h-[74px]
+      rounded-[32px]
+      overflow-hidden
+      border border-white/20
+      bg-white/10 dark:bg-white/[0.08]
+      backdrop-blur-xl
+      backdrop-saturate-200
+      shadow-[0_8px_40px_rgba(0,0,0,0.12)]
+      grid grid-cols-5
+      px-2
+    "
+  >
+    {/* glossy top reflection */}
+    <div className="absolute inset-0 rounded-[32px] bg-gradient-to-b from-white/35 via-white/10 to-transparent pointer-events-none" />
 
-      {/* Mobile FAB */}
-      <button
-        onClick={fabContext.action}
-        className="lg:hidden fixed bottom-20 right-4 h-14 w-14 rounded-full gradient-primary text-primary-foreground shadow-lg flex items-center justify-center z-40 active:scale-95 transition-transform"
-        aria-label={`Tambah ${fabContext.label}`}
+    {/* liquid edge light */}
+    <div className="absolute inset-[1px] rounded-[31px] border border-white/15 pointer-events-none" />
+
+    {/* soft glow */}
+    <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-40 h-20 bg-white/20 blur-3xl pointer-events-none" />
+
+    {mobileNav.map((item) => (
+      <NavLink
+        key={item.to}
+        to={item.to}
+        end={item.end}
+        className={({ isActive }) =>
+          cn(
+            "relative flex flex-col items-center justify-center transition-all duration-500",
+            isActive
+              ? "text-foreground"
+              : "text-muted-foreground"
+          )
+        }
       >
-        <Plus className="h-6 w-6" />
-      </button>
+        {({ isActive }) => (
+          <>
+            {/* liquid active pill */}
+            {isActive && (
+              <div
+                className="
+                  absolute
+                  h-14
+                  w-14
+                  rounded-2xl
+                  bg-white/20
+                  dark:bg-white/10
+                  backdrop-blur-md
+                  border border-white/20
+                  shadow-[inset_0_1px_1px_rgba(255,255,255,0.35),0_4px_20px_rgba(255,255,255,0.08)]
+                "
+              />
+            )}
+
+            <div className="relative z-10 flex flex-col items-center gap-1">
+              <item.icon
+                className={cn(
+                  "h-5 w-5 transition-all duration-500",
+                  isActive && "scale-110"
+                )}
+              />
+
+              <span className="text-[10px] font-medium">
+                {item.label}
+              </span>
+            </div>
+          </>
+        )}
+      </NavLink>
+    ))}
+  </nav>
+</div>
+
+   {/* Mobile FAB - Liquid */}
+<button
+  onClick={fabContext.action}
+  className="
+    lg:hidden
+    fixed
+    bottom-28
+    right-5
+    h-14
+    w-14
+    rounded-full
+    overflow-hidden
+    border border-white/20
+    bg-white/15
+    dark:bg-white/10
+    backdrop-blur-xl
+    backdrop-saturate-200
+    shadow-[0_8px_30px_rgba(0,0,0,0.18)]
+    flex items-center justify-center
+    text-foreground
+    z-50
+    transition-all duration-300
+    active:scale-95
+  "
+  aria-label={`Tambah ${fabContext.label}`}
+>
+  <div className="absolute inset-0 bg-gradient-to-b from-white/30 to-transparent" />
+  <Plus className="relative z-10 h-6 w-6" />
+</button>
 
       {/* Dialogs */}
       <TransactionDialog open={openDialog === "tx"} onOpenChange={(o) => setOpenDialog(o ? "tx" : null)} />

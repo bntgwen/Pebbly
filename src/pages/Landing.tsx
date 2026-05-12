@@ -33,10 +33,7 @@ const faqs = [
     q: "Bagaimana cara data saya tetap aman?",
     a: "Semua data disimpan lokal di perangkat Anda menggunakan enkripsi end-to-end. Kami tidak pernah mengirim data ke server tanpa persetujuan Anda."
   },
-  {
-    q: "Apakah saya bisa menggunakan Pebble offline?",
-    a: "Ya! Pebble berfungsi sepenuhnya offline. Sinkronisasi antar perangkat hanya terjadi ketika koneksi tersedia."
-  },
+
   {
     q: "Berapa lama data saya tersimpan?",
     a: "Data Anda tersimpan selama Anda menggunakan aplikasi. Anda memiliki kontrol penuh untuk ekspor atau hapus kapan saja."
