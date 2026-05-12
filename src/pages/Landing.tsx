@@ -155,41 +155,58 @@ export default function Landing() {
         </div>
       </header>
 
-      {/* Hero Section - Enhanced */}
-      <section className="relative overflow-hidden mesh-bg pt-20 pb-32 lg:py-40">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent pointer-events-none" />
-        <div className="container relative">
-          <div className="max-w-4xl mx-auto text-center space-y-8 animate-slide-up">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-xs font-medium border border-primary/20">
+       {/* Hero Section */}
+      <section className="relative overflow-hidden pt-20 pb-32 lg:py-48">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/8 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute top-20 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl -z-10" />
+        
+        <div className="container relative px-4 sm:px-6">
+          <div className="max-w-5xl mx-auto text-center space-y-10 animate-slide-up">
+            <div className="inline-flex items-center gap-3 px-4 py-2.5 rounded-full glass-card text-xs font-medium border border-primary/30 backdrop-blur-sm hover:border-primary/50 transition-colors duration-300">
               <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-              Personal Finance OS untuk Indonesia
+              <span>Personal Finance OS untuk Indonesia</span>
               <ArrowRight className="h-3 w-3" />
             </div>
             
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-[1.1]">
-              Atur uang Anda<br />
-              <span className="gradient-text">seperti seorang CFO.</span>
-            </h1>
-            
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Dashboard keuangan pribadi modern dengan format Rupiah otomatis, anggaran cerdas, target tabungan, dan sinkronisasi real-time. Dirancang khusus untuk cara orang Indonesia mengelola uang.
-            </p>
+            <div className="space-y-6">
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.05] space-y-3">
+                <div>Atur uang Anda</div>
+                <div>
+                  <span className="gradient-text">seperti seorang CFO.</span>
+                </div>
+              </h1>
+              
+              <p className="text-lg sm:text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-light">
+                Dashboard keuangan pribadi modern dengan format Rupiah otomatis, anggaran cerdas, target tabungan, dan sinkronisasi real-time. Dirancang khusus untuk cara orang Indonesia mengelola uang.
+              </p>
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-              <Button size="lg" asChild className="gap-2 text-base h-13 px-8 shadow-lg hover:shadow-xl transition-all">
+              <Button size="lg" asChild className="gap-2 text-base h-14 px-8 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 group">
                 <Link to={isAuthed ? "/app" : "/register"}>
-                  Mulai Gratis <ArrowRight className="h-5 w-5" />
+                  Mulai Gratis 
+                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild className="text-base h-13 px-8">
-                <a href="#features">Lihat Demo</a>
+              <Button size="lg" variant="outline" asChild className="text-base h-14 px-8 hover:scale-105 transition-all duration-300">
+                <a href="#features">Lihat Fitur</a>
               </Button>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-8 pt-8 text-sm">
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-5 w-5 text-success" /> <span>Tanpa kartu kredit</span></div>
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-5 w-5 text-success" /> <span>Data 100% lokal</span></div>
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-5 w-5 text-success" /> <span>Bisa offline</span></div>
+            <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 pt-8 text-sm">
+              <div className="flex items-center gap-2 hover:scale-105 transition-transform duration-300">
+                <CheckCircle2 className="h-5 w-5 text-success flex-shrink-0" /> 
+                <span>Tanpa kartu kredit</span>
+              </div>
+              <div className="flex items-center gap-2 hover:scale-105 transition-transform duration-300">
+                <CheckCircle2 className="h-5 w-5 text-success flex-shrink-0" /> 
+                <span>Data 100% lokal</span>
+              </div>
+              <div className="flex items-center gap-2 hover:scale-105 transition-transform duration-300">
+                <CheckCircle2 className="h-5 w-5 text-success flex-shrink-0" /> 
+                <span>Bisa offline</span>
+              </div>
             </div>
           </div>
 
