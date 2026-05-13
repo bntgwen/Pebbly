@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "public": true,
+  "installCommand": "npm install --legacy-peer-deps",
+  "build": {
+    "env": {
+      "NODE_VERSION": "20"
+    }
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
