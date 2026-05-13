@@ -44,7 +44,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<SplashScreen />} />
-            <Route path="/welcome" element={<Landing />} />
+            <Route path="/home" element={<Landing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
